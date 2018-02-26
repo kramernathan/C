@@ -1,0 +1,218 @@
+P3C.C
+====================
+
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct nodetype node;
+typedef node *link;
+
+struct nodetype
+{
+int  dat;
+link ptr;
+};
+
+struct stacktype
+{
+link top;
+};
+
+typedef struct stacktype *stack;
+
+link makenode( int num );
+void push( stack st, int num );
+int pop( stack st );
+void printstack( stack st );
+stack makestack( );
+
+int main()
+{
+   int num, i;
+   int k = 0;
+   int sum = 0;
+   int sum2 = 1;
+   stack list;
+   stack list2;
+
+   list = makestack();
+   list2 = makestack();
+
+   printf("Enter number: ");
+   scanf("%d", &num);
+   push(list, num);
+   push(list2, num);
+
+   while( num != 0)
+   {
+       printf("Enter another number: ");
+       scanf("%d", &num);
+       push(list, num);
+       push(list2, num);
+   }
+
+   for( i = 0; i = (list->top != NULL); ++i)
+   {
+       k = pop( list);
+       sum = sum + k;
+   }
+   printf("sum: %d\n", sum);
+
+   pop(list2);
+//  printstack(list2);
+   for( i = 0; i = (list2->top != NULL); ++i)
+   {
+       k = pop(list2);
+       sum2 = sum2 * k;
+   }
+   printf("product: %d\n", sum2);
+
+   return 0;
+}
+
+link makenode( int num )
+{
+link p;
+p = malloc( sizeof(node) );
+p->dat = num;
+p->ptr = NULL;
+return p;
+}
+
+void push( stack st, int num )
+{
+link node;
+node = makenode( num );
+node->ptr = st->top;;
+st->top = node;
+}
+
+int pop( stack st )
+{
+link tmp;
+int res;
+tmp = st->top;
+res = tmp->dat;
+st->top = tmp->ptr;
+free(tmp);
+return res;
+}
+
+void printstack( stack st )
+{
+link tmp;
+tmp = st->top;
+printf(" --- top at left ---\n");
+while (tmp != NULL)
+{
+  printf("%3d ", tmp->dat);
+  tmp = tmp->ptr;
+}
+printf("\n");
+}
+
+stack makestack( )
+{
+stack thestack;
+thestack = malloc( sizeof( struct stacktype ) );
+thestack->top = NULL;
+return thestack;
+}
+
+
+
+
+
+P3C.C
+===================
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+        int N=0, k, dieone, dietwo, rollsum=0;
+        int two=0, three=0, four=0, five=0, six=0, seven=0, eight=0, nine=0, ten=0, eleven=0, twelve=0;
+        srand( 34 );
+        printf("\nEnter amount of rolls: ");
+        scanf("%d", &N);
+
+                for( k = 0; k < N; k++ )
+        {
+                dieone = rand() % 6 + 1;
+                dietwo = rand() % 6 + 1;
+                rollsum = dieone + dietwo;
+                switch( rollsum )
+                {
+                        case 2: two++;
+                                break;
+                        case 3: three++;
+                                break;
+                        case 4: four++;
+                                break;
+                        case 5: five++;
+                                break;
+                        case 6: six++;
+                                break;
+                        case 7: seven++;
+                                break;
+                        case 8: eight++;
+                                break;
+                        case 9: nine++;
+                                break;
+                        case 10: ten++;
+                                break;
+                        case 11: eleven++;
+                                break;
+                        case 12: twelve++;
+                                break;
+                }
+        }
+        printf("Frequency of sum 2: %d\n", two);
+        printf("Frequency of sum 3: %d\n", three);
+        printf("Frequency of sum 4: %d\n", four);
+        printf("Frequency of sum 5: %d\n", five);
+        printf("Frequency of sum 6: %d\n", six);
+        printf("Frequency of sum 7: %d\n", seven);
+        printf("Frequency of sum 8: %d\n", eight);
+        printf("Frequency of sum 9: %d\n", nine);
+        printf("Frequency of sum 10: %d\n", ten);
+        printf("Frequency of sum 11: %d\n", eleven);
+        printf("Frequency of sum 12: %d\n", twelve);
+
+        return 0;
+}
+
+
+
+
+P3D.C (NEED TO CREATE FILE NAMED words.txt WITH LIST OF WORDS)
+================
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    FILE *words;
+    char str[7][50], revwurd[50];
+    int len, k, p;
+    p = 0;
+    words = fopen( "words.txt", "r" );
+    fscanf(words, "%s", str[p]);
+    while( !feof( words) )
+    {
+        p++;
+        fscanf(words, "%s", str[p]);
+    }
+    for( p = 0; p < 7; p++ )
+    {
+        len = strlen( str[p] );
+        printf("%s -- ", str[p]);
+         for ( k = len - 1; k >=0; k-- )
+         {
+            printf("%c", str[p][k]);
+         }
+        printf(" -- %d\n", len);
+    }
+return 0;
+}

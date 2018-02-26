@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+struct node
+{
+        int dat;
+        struct node *next;
+};
+
+typedef struct node *list;
+
+list makeNode(int n)
+{
+        list x;
+
+        x = malloc(sizeof(struct node));
+        x -> dat = n;
+        x -> next = NULL;
+
+        return x;
+}
+
+void printList(list b)
+{
+        list move;
+        move = b;
+        printf("List: ");
+        while(move != NULL)
+                {
+            printf("%d ", move -> dat);
+            move = move -> next;
+        }
+        printf("\n");
+}
+
+list insertFront(list b, int n)
+{
+        list c = makeNode(n);
+
+        c -> next = b;
+        b = c;
+
+        return b;
+}
+
+int isInList(list b, int val)
+{
+        list move;
+        move = b;
+        if(b == NULL)
+                return 0;
+        if(b -> dat == val)
+                return 1;
+        return isInList(b -> next, val);
+}
+
+int oddPrefix(list b)
+{
+        list move;
+        move = b;
+        if(b == NULL)
+                return 0;
+        if(b -> dat % 2 != 0)
+                return 1 + oddPrefix(b -> next);
+}
+
+int length(list b)
+{
+        list move;
+        move = b;
+        if(b == NULL)
+                return 0;
+        return 1 + length(b -> next);
+}
+int main()
+{
+        list start;
+        int i, x, n, len, j;
+        start = NULL;
+
+        srand(time(NULL));
+
+        j = rand() % 30 + 1;
+
+        for(i = 0; i < j; i++)
+                {
+                x = rand() % 30 + 1;
+            start = insertFront(start, x);
+        }
+        printList(start);
+
+        len = length(start);
+        printf("Length of list: %d\n", len);
+
+        x = oddPrefix(start);
+        printf("Number of items before first even number: %d\n", x);
+
+        printf("Enter a number: ");
+        scanf("%d", &n);
+        if(isInList(start, n) == 1)
+                printf("%d is in the list\n", n);
+        else
+                printf("%d is not in the list\n", n);
+
+        return 0;
+}

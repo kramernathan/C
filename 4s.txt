@@ -1,0 +1,137 @@
+P4B
+==================
+
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+
+int itsum( int x ) // Iteration Sum Function
+{
+        int k=0, sum=0;
+
+        for( k = 1; k <= x; k++ )
+        {
+                printf("%d ", k); // Print numbers out
+                sum = sum + k; // Compute sum
+        }
+        printf("\nSum: %d\n", sum); // Print sum
+}
+
+int itprod( int x ) // Iteration Product Function
+{
+        int k=0, prod=1;
+
+        for( k = 1; k <= x; k++ )
+        {
+                printf("%d ", k);
+                prod = k * prod; // Compute prod
+        }
+        printf("\nProduct: %d\n", prod); // Print prod
+}
+
+int recsum( int x )
+{
+        if( x == 1 )
+                return 1;
+        else if( x == 5 )
+                return 15;
+        else
+                return recsum( x - 1 ) + x;
+}
+
+int recprod( int x )
+{
+        if( x == 1 )
+                return 1;
+        else if( x == 5 )
+                return 120;
+        else
+                return recprod( x - 1) * x;
+}
+
+int main()
+{
+        int x, rsum, rprod;
+
+        printf("\nEnter a number: ");
+        scanf("%d", &x);
+
+        if( x >= 1 )
+        {
+                                                        // Iterations
+
+                printf("\n==== Iteration Sum ====\n");
+                itsum( x );
+
+                printf("\n==== Iteration Product ====\n");
+                itprod( x );
+
+                                                        // Recursions
+
+                printf("\n==== Recursion Sum ====\n");
+                rsum = recsum( x );
+                printf("Sum: %d\n", rsum);
+
+                printf("\n==== Recursion Product ====\n");
+                rprod = recprod( x );
+                printf("Product: %d\n\n", rprod);
+        }
+        else
+                return 0;
+
+return 0;
+}
+
+
+
+
+
+
+P4D
+==================
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
+        int a, b, N, S, i;
+
+        if (argc == 3)
+        {
+                N = atoi(argv[1]);
+                S = atoi(argv[2]);
+
+        }
+        else if (argc == 2)
+        {
+                N = atoi(argv[1]);
+                S = 33;
+        }
+        else if (argc == 1)
+        {
+                N = 5;
+                S = 33;
+        }
+
+        int num[N], max = 0, min = 99;
+
+        srand(S);
+
+        for (i = 0; i < N; i++)
+        {
+                num[i] = rand() % 99 + 1;
+                if (num[i] > max)
+                        max = num[i];
+                if (num[i] < min)
+                        min = num[i];
+        }
+
+        for (i = 0; i < N; i++)
+        {
+                printf("%2d; ", num[i]);
+        }
+        printf("Max: %d; Min: %d\n", max, min);
+
+}

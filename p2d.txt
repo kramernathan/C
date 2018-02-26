@@ -1,0 +1,26 @@
+int isDuplicate() //p2d
+{
+   int k, i[2000];
+   int end = 0, count = 0;
+
+   i[0] = rand() % 100;
+   count++;
+   for( k = 1; k < 2000; k++ )
+        {
+        i[k] = rand() % 100;
+        count++;
+        end++;
+        for( k = 0; k < end; k++)
+        {
+             if( i[end] == i[k] )
+             {
+                 printf("====p2d====\n");
+                 printf("%d values before duplicate\n", count);
+                 for( k = 0; k <= end; k++ )
+                 printf("%d ", i[k]);
+                 printf("\n\n");
+                 return 1;
+             }
+        }
+    }
+}
